@@ -17,11 +17,18 @@ def load_saved_model(saved_model_dir):
     return model
 
 
-def tf_to_trt_graph(precision_mode="float32", saved_model_dir=None):
+def tf_to_trt_graph(precision_mode="float32", saved_model_dir=None, max_workspace_size_bytes=4000000000):
 
     if precision_mode == "float32":
         precision_mode = trt.TrtPrecisionMode.FP32
+        output_prefix = "_FP32"
     elif precision_mode == "float16":
         precision_mode = trt.TrtPrecisionMode.FP16
+        output_prefix = "_FP16"
 
-    out_save_dir = os.path.join(saved_model_dir, )
+    out_save_dir = os.path.join(saved_model_dir, output_prefix)
+    conversion_params = trt.DEFAULT_TRT_CONVERSION_PARAMS._replace(
+        precision_mode=precision_mode,
+        max_workspace_size_bytes=max_workspace_size_bytes
+    )
+
