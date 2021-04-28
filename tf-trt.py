@@ -31,4 +31,10 @@ def tf_to_trt_graph(precision_mode="float32", saved_model_dir=None, max_workspac
         precision_mode=precision_mode,
         max_workspace_size_bytes=max_workspace_size_bytes
     )
+    converter = trt.TrtGraphConverterV2(
+        input_saved_model_dir=saved_model_dir,
+        conversion_params=conversion_params
+    )
+    converter.convert()
+    converter.save(out_save_dir)
 
