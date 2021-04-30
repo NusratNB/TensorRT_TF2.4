@@ -1,4 +1,4 @@
-# TensorRT_TF2.4
+# TensorRT_TF2
 TensorRT implementation with Tensorflow 2
 
 **Reference:**
