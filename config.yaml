@@ -1,2 +1,4 @@
-- Config: {dir_fr_graph: path to save frozen graph file, dir_to_model: path to your
-      .h5 checkpoint, max_workspace: 1000000000, pr_mode: float32}
+- Config: {dir_fr_graph: path to save frozen graph file,
+           dir_to_model: path to your .h5 checkpoint,
+           max_workspace: 1000000000,
+           pr_mode: float32}

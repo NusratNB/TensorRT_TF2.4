@@ -1,2 +1,0 @@
-pr_mode = "float32"
-model = "yr_model.h5"

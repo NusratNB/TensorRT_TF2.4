@@ -3,6 +3,7 @@ import os
 from tensorflow.python.compiler.tensorrt import trt_convert as trt
 from tensorflow.python.saved_model import tag_constants
 import argparse
+import yaml
 
 
 def save_tf_model(path_to_model, path_to_saving):
@@ -43,11 +44,13 @@ def tf_to_trt_graph(precision_mode=None, saved_model_dir=None, max_workspace_siz
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--pr_mode", default="float32", required=True, help="The precision_mode should be float32 or float16")
-    parser.add_argument("--dir_to_model", default=None, required=True, help="Path to saved .h5 checkpoint file")
-    parser.add_argument("--dir_fr_graph", default=None, required=True, help="Path to saving .pb frozen graph file")
-    parser.add_argument("--max_workspace", default=1000000000, help="Maximum GPU workspace for TensorRT")
-    args = parser.parse_args()
-    save_tf_model(args.dir_to_model, args.dir_fr_graph)
-    tf_to_trt_graph(args.pr_mode, args.dir_fr_graph, int(args.max_workspace))
+
+    with open("config.yaml", "r") as yamlfile:
+        data = yaml.load(yamlfile)
+        print("Read successful")
+    config = data[0]["Config"]
+
+    save_tf_model(config['dir_to_model'], config['dir_fr_graph'])
+    tf_to_trt_graph(config['pr_mode'], config['dir_fr_graph'], int(config['pr_mode']))
+
+
