@@ -4,6 +4,7 @@
 
 ### Usage
 Modify settings in ```config.yaml``` file
+
 Run
 ```python
 python3 tf-trt.py
